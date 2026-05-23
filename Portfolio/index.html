@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neo Masobela — Cloud Practitioner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #000810;
+      --surface: #020d1a;
+      --card: #051525;
+      --card2: #071a2e;
+      --border: #0d2d4a;
+      --border2: #1a3d5c;
+      --text: #ffffff;
+      --text2: #a8c8e8;
+      --text3: #4a7fa0;
+      --blue: #60b8f0;
+      --blue2: #a8d8f8;
+      --font: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(96,184,240,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(96,184,240,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+
+    section, nav, footer { position: relative; z-index: 1; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 60px; height: 64px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,8,16,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--mono); font-weight: 500; font-size: 0.9rem; color: var(--text); letter-spacing: 0.08em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo-dot { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: blink 2s infinite; box-shadow: 0 0 8px var(--blue); }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text3); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-cv { background: var(--blue); color: #000810 !important; padding: 6px 16px; font-size: 0.72rem !important; font-weight: 700 !important; letter-spacing: 0.1em; transition: opacity 0.2s !important; }
+    .nav-cv:hover { opacity: 0.85; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 60px 80px; max-width: 1280px; margin: 0 auto; position: relative; }
+    .hero-line { position: absolute; top: 0; bottom: 0; left: 60px; width: 1px; background: linear-gradient(to bottom, transparent, var(--blue) 20%, var(--blue) 80%, transparent); opacity: 0.3; }
+    .hero-content { padding-left: 48px; max-width: 800px; }
+    .hero-eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); display: flex; align-items: center; gap: 12px; margin-bottom: 36px; animation: fadeUp 0.7s ease both; }
+    .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--blue); }
+    .open-badge { background: rgba(96,184,240,0.12); border: 1px solid rgba(96,184,240,0.3); color: var(--blue); font-size: 0.68rem; padding: 4px 12px; letter-spacing: 0.12em; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; animation: fadeUp 0.7s ease both; }
+    .open-badge::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; animation: blink 1.5s infinite; }
+    h1 { font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 32px; animation: fadeUp 0.7s 0.1s ease both; }
+    h1 em { font-style: normal; color: var(--text3); }
+    .hero-desc { font-size: 1rem; color: var(--text2); max-width: 500px; margin-bottom: 52px; font-weight: 300; line-height: 1.8; animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+    .btn-blue { background: var(--blue); color: #000810; padding: 14px 36px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; border: 1px solid var(--blue); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-blue:hover { background: transparent; color: var(--blue); }
+    .btn-ghost { background: transparent; color: var(--text2); padding: 14px 36px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border2); transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+    .hero-stats { display: flex; gap: 0; margin-top: 80px; border: 1px solid var(--border); animation: fadeUp 0.7s 0.4s ease both; width: fit-content; }
+    .hero-stat { padding: 20px 36px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; color: var(--blue); }
+    .hero-stat-label { font-size: 0.7rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; font-family: var(--mono); }
+
+    /* SECTION WRAPPER */
+    .section-wrap { max-width: 1280px; margin: 0 auto; padding: 120px 60px; }
+    .section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 64px; }
+    .section-num { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); letter-spacing: 0.15em; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; }
+    h2 em { font-style: normal; color: var(--text3); }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: center; }
+    .about-text p { color: var(--text2); margin-bottom: 22px; font-size: 0.95rem; font-weight: 300; line-height: 1.9; }
+    .about-text p strong { color: white; font-weight: 600; }
+    .about-card { border: 1px solid var(--border); padding: 48px; background: var(--card); position: relative; }
+    .about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--blue2)); }
+    .about-initials { font-size: 5rem; font-weight: 900; letter-spacing: -0.04em; background: linear-gradient(135deg, var(--blue), var(--blue2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 24px; }
+    .about-role { font-family: var(--mono); font-size: 0.75rem; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 32px; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .about-tag { font-size: 0.7rem; padding: 5px 12px; border: 1px solid var(--border2); color: var(--text2); font-family: var(--mono); }
+
+    /* SKILLS */
+    #skills { background: var(--bg); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .skill-card { background: var(--bg); padding: 40px 36px; transition: background 0.2s; position: relative; overflow: hidden; }
+    .skill-card:hover { background: var(--card2); }
+    .skill-card::after { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--blue); transition: height 0.3s; }
+    .skill-card:hover::after { height: 100%; }
+    .skill-num { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); letter-spacing: 0.15em; margin-bottom: 24px; }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 16px; }
+    .skill-name { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .skill-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.7; margin-bottom: 20px; font-weight: 300; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stag { font-family: var(--mono); font-size: 0.65rem; padding: 3px 8px; border: 1px solid var(--border2); color: var(--text3); }
+
+    /* JOURNEY */
+    #journey { background: var(--surface); }
+    .journey-intro { color: var(--text2); font-size: 0.95rem; font-weight: 300; max-width: 600px; margin-bottom: 72px; line-height: 1.9; }
+    .journey-timeline { position: relative; padding-left: 40px; }
+    .journey-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--blue), transparent); }
+    .journey-item { position: relative; margin-bottom: 72px; opacity: 0; transform: translateX(-20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .journey-item.visible { opacity: 1; transform: translateX(0); }
+    .journey-dot { position: absolute; left: -46px; top: 6px; width: 12px; height: 12px; border: 2px solid var(--blue); border-radius: 50%; background: var(--bg); transition: background 0.3s; }
+    .journey-item:hover .journey-dot { background: var(--blue); box-shadow: 0 0 16px var(--blue); }
+    .journey-date { font-family: var(--mono); font-size: 0.68rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+    .journey-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .journey-desc { font-size: 0.88rem; color: var(--text2); font-weight: 300; line-height: 1.8; margin-bottom: 16px; max-width: 650px; }
+    .journey-learned { background: var(--card); border: 1px solid var(--border); padding: 20px 24px; margin-top: 16px; max-width: 650px; }
+    .journey-learned-title { font-family: var(--mono); font-size: 0.65rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+    .journey-learned ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .journey-learned ul li { font-size: 0.82rem; color: var(--text2); font-weight: 300; display: flex; align-items: flex-start; gap: 10px; }
+    .journey-learned ul li::before { content: '→'; color: var(--blue); font-family: var(--mono); flex-shrink: 0; }
+    .journey-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .jtag { font-family: var(--mono); font-size: 0.65rem; padding: 3px 10px; border: 1px solid var(--border2); color: var(--text3); }
+
+    /* PROJECTS */
+    #projects { background: var(--bg); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+    .project-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: all 0.3s; position: relative; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--blue2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .project-steps { padding: 0; }
+    .project-step { padding: 20px 28px; border-bottom: 1px solid var(--border); display: flex; gap: 16px; align-items: flex-start; }
+    .project-step:last-child { border-bottom: none; }
+    .step-num { font-family: var(--mono); font-size: 0.65rem; color: var(--blue); min-width: 24px; padding-top: 3px; }
+    .step-text { font-size: 0.82rem; color: var(--text2); font-weight: 300; line-height: 1.7; }
+    .project-header { padding: 28px 28px 0; }
+    .project-index { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); margin-bottom: 8px; }
+    .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .project-summary { font-size: 0.85rem; color: var(--text2); font-weight: 300; margin-bottom: 20px; }
+    .project-divider { height: 1px; background: var(--border); margin: 0 28px; }
+    .steps-label { font-family: var(--mono); font-size: 0.65rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; padding: 16px 28px 8px; }
+    .project-footer-tags { padding: 16px 28px; display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--border); }
+    .ptag { font-family: var(--mono); font-size: 0.65rem; padding: 3px 10px; border: 1px solid var(--border2); color: var(--text3); }
+
+    /* AWS IN PROGRESS */
+    #aws-progress { background: var(--surface); }
+    .aws-card { border: 1px solid var(--border); background: var(--card); padding: 56px; position: relative; overflow: hidden; }
+    .aws-card::before { content: 'AWS'; position: absolute; right: -20px; top: -20px; font-size: 9rem; font-weight: 900; color: rgba(96,184,240,0.04); letter-spacing: -0.05em; pointer-events: none; }
+    .aws-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .aws-info h3 { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .aws-info p { color: var(--text2); font-size: 0.9rem; font-weight: 300; line-height: 1.8; margin-bottom: 24px; }
+    .aws-status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.72rem; color: var(--blue); letter-spacing: 0.12em; background: rgba(96,184,240,0.08); border: 1px solid rgba(96,184,240,0.2); padding: 8px 16px; }
+    .aws-status::before { content: ''; width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: blink 1.5s infinite; }
+    .aws-progress-wrap { display: flex; flex-direction: column; gap: 20px; }
+    .aws-prog-item {}
+    .aws-prog-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .aws-prog-label { font-size: 0.8rem; font-weight: 500; }
+    .aws-prog-pct { font-family: var(--mono); font-size: 0.72rem; color: var(--blue); }
+    .aws-prog-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .aws-prog-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue2)); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .aws-domains { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+    .aws-domain { background: var(--card2); border: 1px solid var(--border); padding: 16px; }
+    .aws-domain-name { font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+    .aws-domain-desc { font-size: 0.72rem; color: var(--text3); font-weight: 300; }
+
+    /* CERTIFICATIONS */
+    #certifications { background: var(--bg); }
+    .badge-row { display: flex; justify-content: center; align-items: center; margin-bottom: 72px; padding: 48px; border: 1px solid var(--border); background: var(--card); position: relative; overflow: hidden; }
+    .badge-row::before { content: 'CERTIFIED'; position: absolute; font-size: 8rem; font-weight: 900; color: rgba(96,184,240,0.03); letter-spacing: -0.05em; pointer-events: none; }
+    .badge-img { width: 160px; height: 160px; object-fit: contain; transition: transform 0.3s; cursor: pointer; }
+    .badge-img:hover { transform: scale(1.1); }
+    .badge-label { margin-left: 48px; }
+    .badge-label h3 { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .badge-label p { font-size: 0.85rem; color: var(--text2); font-weight: 300; }
+    .badge-label .badge-meta { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); margin-top: 16px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .cert-category-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); padding: 14px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; margin-top: 48px; display: flex; align-items: center; gap: 12px; }
+    .cert-category-label::before { content: ''; width: 20px; height: 1px; background: var(--blue); }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .cert-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; cursor: pointer; transition: all 0.25s; position: relative; }
+    .cert-card:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .cert-thumb { width: 100%; height: 150px; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--border); transition: opacity 0.3s; }
+    .cert-card:hover .cert-thumb { opacity: 0.9; }
+    .cert-body { padding: 18px 20px; }
+    .cert-name { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; line-height: 1.3; }
+    .cert-issuer-name { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); }
+    .cert-date { font-family: var(--mono); font-size: 0.68rem; color: var(--blue); margin-top: 8px; }
+    .cert-hover-hint { position: absolute; bottom: 0; left: 0; right: 0; background: var(--blue); color: #000810; text-align: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px; transform: translateY(100%); transition: transform 0.2s; }
+    .cert-card:hover .cert-hover-hint { transform: translateY(0); }
+
+    /* LIGHTBOX */
+    .lightbox { position: fixed; inset: 0; z-index: 999; background: rgba(0,8,16,0.97); display: flex; align-items: center; justify-content: center; padding: 40px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-img { max-width: 88vw; max-height: 82vh; object-fit: contain; border: 1px solid var(--border2); }
+    .lightbox-close { position: absolute; top: 28px; right: 36px; font-size: 1.6rem; color: var(--text3); cursor: pointer; transition: color 0.2s; font-family: var(--mono); line-height: 1; }
+    .lightbox-close:hover { color: var(--blue); }
+    .lightbox-caption { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font-family: var(--mono); font-size: 0.75rem; color: var(--text3); letter-spacing: 0.1em; }
+
+    /* CONTACT */
+    #contact { background: var(--surface); }
+    .contact-inner { border: 1px solid var(--border); padding: 80px; text-align: center; position: relative; overflow: hidden; }
+    .contact-inner::before { content: 'HELLO'; position: absolute; font-size: 10rem; font-weight: 900; color: rgba(96,184,240,0.03); letter-spacing: -0.05em; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; white-space: nowrap; }
+    .contact-inner h2 { margin-bottom: 16px; }
+    .contact-inner p { color: var(--text2); margin-bottom: 12px; font-weight: 300; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .contact-avail { font-family: var(--mono); font-size: 0.72rem; color: var(--blue); margin-bottom: 48px; display: block; }
+    .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .contact-link { display: flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid var(--border2); text-decoration: none; color: var(--text2); font-size: 0.8rem; letter-spacing: 0.08em; font-weight: 500; transition: all 0.2s; background: var(--card); }
+    .contact-link:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; }
+    .footer-left { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); }
+    .footer-right { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero, .section-wrap { padding-left: 24px; padding-right: 24px; }
+      .hero-content { padding-left: 24px; }
+      .about-grid, .aws-grid { grid-template-columns: 1fr; gap: 48px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .badge-row { flex-direction: column; text-align: center; }
+      .badge-label { margin-left: 0; margin-top: 32px; }
+      .contact-inner { padding: 40px 24px; }
+      .hero-stats { flex-direction: column; width: 100%; }
+      .hero-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-stat:last-child { border-bottom: none; }
+      .aws-domains { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+    }
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MASCOT ── */
+    #mascot {
+      position: fixed; bottom: 0; right: 32px; z-index: 200;
+      display: flex; flex-direction: column; align-items: flex-end;
+      pointer-events: none;
+    }
+    .mascot-bubble {
+      background: var(--card); border: 1px solid var(--blue);
+      color: var(--text); font-size: 0.8rem; line-height: 1.5;
+      padding: 12px 16px; border-radius: 12px 12px 0 12px;
+      max-width: 220px; margin-bottom: 10px; margin-right: 12px;
+      box-shadow: 0 4px 24px rgba(96,184,240,0.15);
+      opacity: 0; transform: translateY(10px) scale(0.95);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: auto; position: relative;
+    }
+    .mascot-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+    .mascot-bubble::after { content: ''; position: absolute; bottom: -6px; right: 18px; width: 10px; height: 10px; background: var(--card); border-right: 1px solid var(--blue); border-bottom: 1px solid var(--blue); transform: rotate(45deg); }
+    .mascot-bubble-close { position: absolute; top: 6px; right: 10px; font-size: 0.7rem; color: var(--text3); cursor: pointer; line-height: 1; }
+    .mascot-bubble-close:hover { color: var(--blue); }
+    .mascot-body {
+      width: 72px; cursor: pointer;
+      transform: translateY(52px);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      pointer-events: auto;
+      filter: drop-shadow(0 0 12px rgba(96,184,240,0.3));
+    }
+    .mascot-body:hover { filter: drop-shadow(0 0 20px rgba(96,184,240,0.6)); }
+    #mascot.peek .mascot-body { transform: translateY(0); }
+    #mascot.peek-half .mascot-body { transform: translateY(28px); }
+    .mascot-body svg { width: 72px; height: 90px; display: block; }
+    /* helmet visor glow */
+    @keyframes visorPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+    .visor { animation: visorPulse 3s infinite; }
+    /* wave arm */
+    @keyframes wave { 0%,100%{transform-origin:bottom;transform:rotate(0deg)} 25%{transform-origin:bottom;transform:rotate(-20deg)} 75%{transform-origin:bottom;transform:rotate(10deg)} }
+    .arm-wave { animation: wave 1.2s ease-in-out; }
+
+    /* ── TOOL TOOLTIP ── */
+    .ptag { cursor: pointer; transition: all 0.2s; }
+    .ptag:hover { border-color: var(--blue); color: var(--blue); background: rgba(96,184,240,0.08); }
+    .tool-modal-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,8,16,0.85); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .tool-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .tool-modal {
+      background: var(--card); border: 1px solid var(--blue);
+      padding: 40px; max-width: 480px; width: 100%;
+      transform: translateY(20px) scale(0.97); transition: transform 0.3s;
+      position: relative;
+    }
+    .tool-modal-overlay.open .tool-modal { transform: translateY(0) scale(1); }
+    .tool-modal-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .tool-modal-name { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.02em; }
+    .tool-modal-category { font-family: var(--mono); font-size: 0.68rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; }
+    .tool-modal-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.8; font-weight: 300; margin-bottom: 20px; }
+    .tool-modal-facts { display: flex; flex-direction: column; gap: 8px; }
+    .tool-modal-fact { display: flex; gap: 10px; font-size: 0.82rem; color: var(--text2); }
+    .tool-modal-fact::before { content: '→'; color: var(--blue); font-family: var(--mono); flex-shrink: 0; }
+    .tool-modal-close { position: absolute; top: 16px; right: 20px; font-size: 1.2rem; color: var(--text3); cursor: pointer; font-family: var(--mono); }
+    .tool-modal-close:hover { color: var(--blue); }
+
+    /* ── PROJECT STEP EXPAND ── */
+    .project-step { cursor: pointer; transition: background 0.2s; border-radius: 0; }
+    .project-step:hover { background: rgba(96,184,240,0.05); }
+    .step-expand { margin-top: 10px; font-size: 0.8rem; color: var(--text3); font-weight: 300; line-height: 1.7; display: none; padding-top: 8px; border-top: 1px solid var(--border); }
+    .project-step.open .step-expand { display: block; }
+    .step-toggle { margin-left: auto; font-family: var(--mono); font-size: 0.65rem; color: var(--blue); flex-shrink: 0; padding-top: 3px; transition: transform 0.2s; }
+    .project-step.open .step-toggle { transform: rotate(45deg); }
+    .project-step { align-items: flex-start; }
+    .step-main { display: flex; gap: 16px; align-items: flex-start; width: 100%; }
+
+    /* ============ MASCOT ============ */
+    #mascot { position: fixed; bottom: 0; right: 40px; z-index: 500; display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
+    .mascot-bubble { background: var(--card); border: 1px solid var(--blue); color: var(--text); font-size: 0.78rem; line-height: 1.5; padding: 12px 16px; max-width: 220px; margin-bottom: 10px; position: relative; pointer-events: all; opacity: 0; transform: translateY(10px) scale(0.95); transition: opacity 0.3s ease, transform 0.3s ease; box-shadow: 0 0 24px rgba(96,184,240,0.15); }
+    .mascot-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+    .mascot-bubble::after { content: ''; position: absolute; bottom: -7px; right: 28px; width: 12px; height: 12px; background: var(--card); border-right: 1px solid var(--blue); border-bottom: 1px solid var(--blue); transform: rotate(45deg); }
+    .mascot-bubble-close { position: absolute; top: 6px; right: 8px; font-size: 0.65rem; color: var(--text3); cursor: pointer; }
+    .mascot-bubble-close:hover { color: var(--blue); }
+    .mascot-char { width: 80px; cursor: pointer; pointer-events: all; transform: translateY(60px); transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); filter: drop-shadow(0 0 12px rgba(96,184,240,0.3)); }
+    .mascot-char:hover { filter: drop-shadow(0 0 20px rgba(96,184,240,0.6)); }
+    .mascot-char.peek { transform: translateY(20px); }
+    .mascot-char.up { transform: translateY(0); }
+    .mascot-char.wave { animation: wave-anim 0.6s ease; }
+    @keyframes wave-anim { 0%,100%{transform:translateY(0) rotate(0deg)} 25%{transform:translateY(-6px) rotate(-8deg)} 75%{transform:translateY(-6px) rotate(8deg)} }
+    /* ============ TOOL MODAL ============ */
+    .tool-modal-overlay { position: fixed; inset: 0; z-index: 900; background: rgba(0,8,16,0.92); display: flex; align-items: center; justify-content: center; padding: 40px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .tool-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .tool-modal { background: var(--card); border: 1px solid var(--border2); max-width: 520px; width: 100%; position: relative; transform: translateY(20px); transition: transform 0.25s; }
+    .tool-modal-overlay.open .tool-modal { transform: translateY(0); }
+    .tool-modal-header { padding: 24px 28px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
+    .tool-modal-icon { font-size: 2rem; }
+    .tool-modal-title { font-size: 1.1rem; font-weight: 700; }
+    .tool-modal-sub { font-family: var(--mono); font-size: 0.7rem; color: var(--blue); margin-top: 2px; }
+    .tool-modal-close { position: absolute; top: 20px; right: 24px; font-size: 1.2rem; color: var(--text3); cursor: pointer; font-family: var(--mono); transition: color 0.2s; }
+    .tool-modal-close:hover { color: var(--blue); }
+    .tool-modal-body { padding: 24px 28px; }
+    .tool-modal-desc { font-size: 0.88rem; color: var(--text2); font-weight: 300; line-height: 1.8; margin-bottom: 20px; }
+    .tool-modal-uses-title { font-family: var(--mono); font-size: 0.65rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+    .tool-modal-uses ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .tool-modal-uses ul li { font-size: 0.82rem; color: var(--text2); display: flex; gap: 10px; font-weight: 300; }
+    .tool-modal-uses ul li::before { content: "→"; color: var(--blue); font-family: var(--mono); flex-shrink: 0; }
+    .tool-modal-footer { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .tool-modal-tag { font-family: var(--mono); font-size: 0.65rem; padding: 3px 10px; border: 1px solid var(--border2); color: var(--text3); }
+    /* ============ STEP EXPAND ============ */
+    .step-expand { display: none; margin-top: 10px; padding: 14px 16px; background: rgba(96,184,240,0.05); border-left: 2px solid var(--blue); font-size: 0.8rem; color: var(--text2); font-weight: 300; line-height: 1.7; }
+    .step-toggle { margin-left: auto; color: var(--blue); font-size: 1rem; line-height: 1; flex-shrink: 0; transition: transform 0.2s; }
+    .step-inner { display: flex; align-items: flex-start; gap: 16px; width: 100%; }
+    .project-step { cursor: pointer; transition: background 0.2s; }
+    .project-step:hover { background: rgba(96,184,240,0.05); }
+    .project-step.open .step-expand { display: block; }
+    .project-step.open .step-toggle { transform: rotate(45deg); color: var(--blue); }
+    .ptag { cursor: pointer; transition: all 0.2s; }
+    .ptag:hover { border-color: var(--blue); color: var(--blue); background: rgba(96,184,240,0.08); }
+
+  </style>
+</head>
+<body>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt=""/>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">
+      <span class="nav-logo-dot"></span>NEO MASOBELA
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="cv.pdf" download class="nav-cv">↓ CV</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div style="max-width:1280px;margin:0 auto;padding:120px 60px 80px;width:100%;position:relative;">
+      <div class="hero-line"></div>
+      <div class="hero-content">
+        <div class="open-badge">Open to Work · Available Immediately · Johannesburg, ZA</div>
+        <div class="hero-eyebrow">Cloud Practitioner in Training</div>
+        <h1>NEO<br/><em>MASOBELA</em></h1>
+        <p class="hero-desc">Building expertise across cloud infrastructure, artificial intelligence, cybersecurity, and data analytics. Committed to becoming a practitioner who delivers real business value through technology.</p>
+        <div class="hero-ctas">
+          <a href="cv.pdf" download class="btn-blue">↓ Download CV</a>
+          <a href="#contact" class="btn-ghost">Get in Touch</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hero-stat-num">11</span><span class="hero-stat-label">Certifications</span></div>
+          <div class="hero-stat"><span class="hero-stat-num">AWS</span><span class="hero-stat-label">Cloud Focus</span></div>
+          <div class="hero-stat"><span class="hero-stat-num">2026</span><span class="hero-stat-label">Active Learner</span></div>
+          <div class="hero-stat"><span class="hero-stat-num">4</span><span class="hero-stat-label">Domains</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2>About <em>Me</em></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Hi, I'm <strong>Neo Masobela</strong> — a passionate and driven Cloud Practitioner in training based in Johannesburg. I'm on a focused journey to master cloud computing, with deep interest in AWS infrastructure, AI, and data.</p>
+          <p>Over the past few months I've earned <strong>11 certifications</strong> across cloud, AI, cybersecurity, and data analytics — from Amazon Web Services, Praesignis, NetCampus, LinkedIn Learning, and real-world job simulations with <strong>HPE and Wells Fargo</strong> via Forage.</p>
+          <p>I believe the cloud is transforming every industry. My goal is to become a practitioner who helps organisations <strong>leverage that power</strong> responsibly, efficiently, and securely.</p>
+        </div>
+        <div class="about-card reveal">
+          <div class="about-initials">NM</div>
+          <div class="about-role">Cloud Practitioner in Training</div>
+          <div class="about-tags">
+            <span class="about-tag">AWS</span>
+            <span class="about-tag">Artificial Intelligence</span>
+            <span class="about-tag">Cybersecurity</span>
+            <span class="about-tag">Data Analytics</span>
+            <span class="about-tag">SQL</span>
+            <span class="about-tag">Software Engineering</span>
+            <span class="about-tag">Johannesburg, ZA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2>Skills &amp; <em>Technologies</em></h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-num">01</div><div class="skill-icon">☁️</div>
+          <div class="skill-name">AWS Cloud Services</div>
+          <div class="skill-desc">Hands-on with EC2, S3, IAM, VPC, Lambda, and cloud file systems via AWS SimuLearn and Cloud Quest.</div>
+          <div class="skill-tags"><span class="stag">EC2</span><span class="stag">S3</span><span class="stag">IAM</span><span class="stag">Lambda</span><span class="stag">VPC</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-num">02</div><div class="skill-icon">🤖</div>
+          <div class="skill-name">Artificial Intelligence</div>
+          <div class="skill-desc">Certified in Generative AI for Decision Makers and AI Practitioner Learning Plan. Understands AI strategy and application.</div>
+          <div class="skill-tags"><span class="stag">Gen AI</span><span class="stag">ML Concepts</span><span class="stag">AI Strategy</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-num">03</div><div class="skill-icon">🔐</div>
+          <div class="skill-name">Cybersecurity</div>
+          <div class="skill-desc">Foundations in cybersecurity principles, threat landscapes, and defence strategies for cloud and enterprise environments.</div>
+          <div class="skill-tags"><span class="stag">Network Security</span><span class="stag">Threat Mgmt</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-num">04</div><div class="skill-icon">📊</div>
+          <div class="skill-name">Data Analytics &amp; SQL</div>
+          <div class="skill-desc">SQL for data analysis, data modelling, and introduction to analytics concepts and querying techniques.</div>
+          <div class="skill-tags"><span class="stag">SQL</span><span class="stag">Data Analysis</span><span class="stag">Reporting</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-num">05</div><div class="skill-icon">🏗️</div>
+          <div class="skill-name">Software Engineering</div>
+          <div class="skill-desc">Job simulations at HPE and Wells Fargo: RESTful APIs, data modelling, unit testing, and web service development.</div>
+          <div class="skill-tags"><span class="stag">REST APIs</span><span class="stag">Unit Tests</span><span class="stag">Data Models</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-num">06</div><div class="skill-icon">🌐</div>
+          <div class="skill-name">Cloud Architecture</div>
+          <div class="skill-desc">AWS Well-Architected Framework: reliability, performance, cost optimisation, security, and sustainability pillars.</div>
+          <div class="skill-tags"><span class="stag">High Availability</span><span class="stag">Scalability</span><span class="stag">Cost Opt.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- JOURNEY -->
+  <section id="journey">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2>My Learning <em>Journey</em></h2>
+      </div>
+      <p class="journey-intro reveal">From zero to 11 certifications in a few months — here's a step-by-step look at how I've been building my cloud and tech career from the ground up.</p>
+
+      <div class="journey-timeline">
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-date">February 2026</div>
+          <div class="journey-title">Started with Software Engineering Simulations</div>
+          <div class="journey-desc">Kicked off my learning journey by completing two real-world job simulations on Forage — one with Hewlett Packard Enterprise and one with Wells Fargo. These gave me my first taste of professional software engineering tasks.</div>
+          <div class="journey-learned">
+            <div class="journey-learned-title">What I Learned</div>
+            <ul>
+              <li>How to design and build a RESTful web service from scratch</li>
+              <li>How to create and implement data models used in real banking applications</li>
+              <li>The importance of unit testing and writing testable code</li>
+              <li>How large companies like HPE and Wells Fargo structure their engineering workflows</li>
+            </ul>
+          </div>
+          <div class="journey-tags"><span class="jtag">REST APIs</span><span class="jtag">Data Modelling</span><span class="jtag">Unit Testing</span><span class="jtag">Forage</span></div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-date">February 2026</div>
+          <div class="journey-title">SQL for Data Analysis — LinkedIn Learning</div>
+          <div class="journey-desc">Completed a focused SQL course covering how to query, filter, aggregate, and analyse data using SQL. This gave me a solid data foundation that complements my cloud work.</div>
+          <div class="journey-learned">
+            <div class="journey-learned-title">What I Learned</div>
+            <ul>
+              <li>Writing SELECT, JOIN, GROUP BY, and WHERE queries confidently</li>
+              <li>How to extract business insights from raw data using SQL</li>
+              <li>Structuring queries for performance and clarity</li>
+            </ul>
+          </div>
+          <div class="journey-tags"><span class="jtag">SQL</span><span class="jtag">Data Analysis</span><span class="jtag">LinkedIn Learning</span></div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-date">March 2026</div>
+          <div class="journey-title">Cybersecurity &amp; AI Foundations — NetCampus</div>
+          <div class="journey-desc">Broadened my knowledge with two NetCampus courses backed by Gauteng Province: Introduction to Cybersecurity and Introduction to Artificial Intelligence. These built important foundational context for working in cloud environments.</div>
+          <div class="journey-learned">
+            <div class="journey-learned-title">What I Learned</div>
+            <ul>
+              <li>Core cybersecurity concepts: threats, vulnerabilities, attacks, and defence strategies</li>
+              <li>How AI systems work, including machine learning basics and real-world applications</li>
+              <li>Why security must be built into every layer of a cloud architecture</li>
+              <li>The relationship between AI and cloud infrastructure</li>
+            </ul>
+          </div>
+          <div class="journey-tags"><span class="jtag">Cybersecurity</span><span class="jtag">AI Foundations</span><span class="jtag">NetCampus</span></div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-date">April 2026</div>
+          <div class="journey-title">AI &amp; Data Analytics — Praesignis &amp; NetCampus</div>
+          <div class="journey-desc">Went deeper into AI and data with three certifications: Generative AI for Decision Makers, AI Practitioner Learning Plan (Praesignis), and Introduction to Data Analytics (NetCampus).</div>
+          <div class="journey-learned">
+            <div class="journey-learned-title">What I Learned</div>
+            <ul>
+              <li>How Generative AI works and how decision makers can apply it strategically</li>
+              <li>The AI practitioner roadmap — tools, frameworks, and use cases</li>
+              <li>Data analytics fundamentals: collecting, processing, visualising, and interpreting data</li>
+              <li>How data analytics and AI work together in modern cloud environments</li>
+            </ul>
+          </div>
+          <div class="journey-tags"><span class="jtag">Gen AI</span><span class="jtag">AI Strategy</span><span class="jtag">Data Analytics</span><span class="jtag">Praesignis</span></div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-date">May 2026</div>
+          <div class="journey-title">AWS Cloud Quest &amp; SimuLearn — Going Hands-On</div>
+          <div class="journey-desc">Moved into hands-on AWS training with Cloud Quest: Cloud Practitioner and AWS SimuLearn: File Systems in the Cloud. This was where theory became practice — actually building and configuring real AWS services.</div>
+          <div class="journey-learned">
+            <div class="journey-learned-title">What I Learned</div>
+            <ul>
+              <li>How to navigate and use the AWS Management Console confidently</li>
+              <li>Configured EC2 instances, S3 buckets, IAM roles, and VPC networks</li>
+              <li>Understood cloud file systems: EFS, FSx, and S3 use cases</li>
+              <li>Applied cloud concepts to real business scenarios through guided labs</li>
+              <li>Earned the AWS Cloud Quest: Cloud Practitioner badge</li>
+            </ul>
+          </div>
+          <div class="journey-tags"><span class="jtag">AWS</span><span class="jtag">EC2</span><span class="jtag">S3</span><span class="jtag">IAM</span><span class="jtag">EFS</span><span class="jtag">Cloud Quest</span></div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-date">Now → June 2026</div>
+          <div class="journey-title">AWS Certified Cloud Practitioner (CLF-C02) — In Progress</div>
+          <div class="journey-desc">Currently preparing for the official AWS Certified Cloud Practitioner exam. All previous learning has been building toward this milestone — the first step on the AWS certification path.</div>
+          <div class="journey-learned">
+            <div class="journey-learned-title">Currently Studying</div>
+            <ul>
+              <li>Cloud concepts, AWS global infrastructure, and deployment models</li>
+              <li>Core AWS services: compute, storage, databases, networking</li>
+              <li>Security and compliance in the AWS shared responsibility model</li>
+              <li>AWS pricing, billing, and support plans</li>
+            </ul>
+          </div>
+          <div class="journey-tags"><span class="jtag">CLF-C02</span><span class="jtag">In Progress</span><span class="jtag">Target: June 2026</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2>Projects &amp; <em>What I Did</em></h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <div class="project-index">PROJECT — 001</div>
+            <div class="project-title">Static Website on AWS S3</div>
+            <div class="project-summary">Deployed a fully hosted static website using core AWS services — no server required.</div>
+          </div>
+          <div class="project-divider"></div>
+          <div class="steps-label">Step-by-step</div>
+          <div class="project-steps">
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-main"><span class="step-num">01</span><span class="step-text">Created an S3 bucket and enabled static website hosting in the bucket settings</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">S3 (Simple Storage Service) lets you store files in the cloud. By enabling "Static Website Hosting" in the bucket properties, AWS serves your HTML files directly as a website — no server needed. You set the index.html as the entry point.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-main"><span class="step-num">02</span><span class="step-text">Uploaded HTML, CSS, and JS files and set the index document</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">I uploaded all the website files into the S3 bucket using the AWS Console. The index document tells AWS which file to load first when someone visits the URL — usually index.html. This is how your browser knows where to start.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-main"><span class="step-num">03</span><span class="step-text">Wrote a bucket policy to allow public read access to all objects</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">By default, S3 buckets are private. I wrote a JSON bucket policy using IAM permissions that grants s3:GetObject access to everyone (*). This makes the files publicly readable so visitors can load the website in their browsers.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-main"><span class="step-num">04</span><span class="step-text">Created a CloudFront distribution pointing to the S3 bucket for fast global delivery</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">CloudFront is AWS's CDN (Content Delivery Network). It caches your website files at edge locations around the world, so users in Johannesburg, London, or Tokyo all get fast load times. I created a distribution with the S3 bucket as the origin.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-main"><span class="step-num">05</span><span class="step-text">Configured Route 53 to point a domain name to the CloudFront distribution</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">Route 53 is AWS's DNS service. I created an A record (alias) that maps a custom domain name to the CloudFront distribution URL. This means visitors can type a friendly domain instead of a long AWS URL to reach the site.</div>
+            </div>
+          </div>
+          <div class="project-footer-tags"><span class="ptag" onclick="openTool('S3')">S3</span><span class="ptag" onclick="openTool('CloudFront')">CloudFront</span><span class="ptag" onclick="openTool('Route53')">Route 53</span><span class="ptag" onclick="openTool('IAM')">IAM</span></div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <div class="project-index">PROJECT — 002</div>
+            <div class="project-title">HPE RESTful Web Service</div>
+            <div class="project-summary">Built a functioning REST API with data upload and unit test coverage during the HPE Forage simulation.</div>
+          </div>
+          <div class="project-divider"></div>
+          <div class="steps-label">Step-by-step</div>
+          <div class="project-steps">
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">01</span><span class="step-text">Reviewed the brief and designed the API structure</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">I read the HPE project brief carefully to understand what the web service needed to do. I then planned the API endpoints, deciding which HTTP methods (GET, POST) to use and what data each endpoint would accept and return.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">02</span><span class="step-text">Built the RESTful web service with GET and POST endpoints</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">REST (Representational State Transfer) is an architectural style for APIs. I implemented GET endpoints to retrieve data and POST endpoints to receive and store new data. Each endpoint returns appropriate HTTP status codes (200 OK, 201 Created, 400 Bad Request).</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">03</span><span class="step-text">Implemented data upload capability through the API</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">I added the ability for clients to upload data via POST requests. The service receives the data in the request body, validates it, and stores it. I learned about request/response cycles, JSON payloads, and how APIs handle data persistence.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">04</span><span class="step-text">Wrote unit tests for every endpoint</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">Unit tests verify that each piece of code works correctly in isolation. I wrote tests that sent requests to each endpoint with different inputs (valid data, invalid data, edge cases) and asserted the responses were correct. This ensures the service is reliable and safe to deploy.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">05</span><span class="step-text">Reviewed and submitted matching HPE engineering standards</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">Before submitting I reviewed the code for clarity, structure, and alignment with the brief. HPE's simulation is designed to mirror real engineering expectations — clean code, proper error handling, and well-documented logic that a team could maintain.</div>
+            </div>
+          </div>
+          <div class="project-footer-tags"><span class="ptag">REST API</span><span class="ptag">Unit Tests</span><span class="ptag">Backend</span><span class="ptag">Forage</span></div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <div class="project-index">PROJECT — 003</div>
+            <div class="project-title">Wells Fargo Data Model</div>
+            <div class="project-summary">Designed and implemented a data model for a financial application in the Wells Fargo engineering simulation.</div>
+          </div>
+          <div class="project-divider"></div>
+          <div class="steps-label">Step-by-step</div>
+          <div class="project-steps">
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">01</span><span class="step-text">Analysed business requirements for the data model</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">I read the Wells Fargo brief to understand what financial data needed to be captured. In banking, data modelling is critical — the wrong structure can cause serious issues. I identified the entities (things to track), their attributes (properties), and how they relate to each other.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">02</span><span class="step-text">Designed entities, relationships, and attributes</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">A data model defines the structure of your data. I mapped out entities (like customers, accounts, transactions), their attributes (name, balance, date), and relationships between them (a customer has many accounts). This is the foundation for any database or application.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">03</span><span class="step-text">Implemented the model in code and validated with sample data</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">I translated the design into code — creating classes/structures that represent each entity and their relationships. I then ran sample data through the model to confirm it captured and stored information correctly without errors or data loss.</div>
+            </div>
+            <div class="project-step" onclick="toggleStep(this)">
+              <div class="step-inner"><span class="step-num">04</span><span class="step-text">Tested data integrity across multiple scenarios</span><span class="step-toggle">+</span></div>
+              <div class="step-expand">Data integrity means the data stays accurate and consistent. I tested edge cases — what happens with missing fields, duplicate entries, or invalid values? In financial applications this is non-negotiable, so I made sure the model handled every scenario correctly.</div>
+            </div>
+          </div>
+          <div class="project-footer-tags"><span class="ptag">Data Model</span><span class="ptag">Backend</span><span class="ptag">Engineering</span><span class="ptag">Forage</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AWS IN PROGRESS -->
+  <section id="aws-progress">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">05</span>
+        <h2>AWS <em>Certification</em></h2>
+      </div>
+      <div class="aws-card reveal">
+        <div class="aws-grid">
+          <div class="aws-info">
+            <h3>AWS Certified Cloud Practitioner</h3>
+            <p>The foundational AWS certification validating overall understanding of the AWS Cloud. I'm actively preparing for the CLF-C02 exam, with a target date of June 2026.</p>
+            <div class="aws-status">In Progress · CLF-C02 · Target June 2026</div>
+            <div class="aws-domains" style="margin-top:32px;">
+              <div class="aws-domain"><div class="aws-domain-name">Cloud Concepts</div><div class="aws-domain-desc">Benefits, deployment models, global infrastructure</div></div>
+              <div class="aws-domain"><div class="aws-domain-name">Security &amp; Compliance</div><div class="aws-domain-desc">Shared responsibility, IAM, compliance programs</div></div>
+              <div class="aws-domain"><div class="aws-domain-name">Core Services</div><div class="aws-domain-desc">Compute, storage, databases, networking</div></div>
+              <div class="aws-domain"><div class="aws-domain-name">Billing &amp; Pricing</div><div class="aws-domain-desc">Pricing models, cost management, support plans</div></div>
+            </div>
+          </div>
+          <div class="aws-progress-wrap">
+            <div class="aws-prog-item">
+              <div class="aws-prog-header"><span class="aws-prog-label">Cloud Concepts</span><span class="aws-prog-pct">85%</span></div>
+              <div class="aws-prog-bar"><div class="aws-prog-fill" data-width="85"></div></div>
+            </div>
+            <div class="aws-prog-item">
+              <div class="aws-prog-header"><span class="aws-prog-label">Security &amp; Compliance</span><span class="aws-prog-pct">75%</span></div>
+              <div class="aws-prog-bar"><div class="aws-prog-fill" data-width="75"></div></div>
+            </div>
+            <div class="aws-prog-item">
+              <div class="aws-prog-header"><span class="aws-prog-label">Core AWS Services</span><span class="aws-prog-pct">80%</span></div>
+              <div class="aws-prog-bar"><div class="aws-prog-fill" data-width="80"></div></div>
+            </div>
+            <div class="aws-prog-item">
+              <div class="aws-prog-header"><span class="aws-prog-label">Billing &amp; Pricing</span><span class="aws-prog-pct">70%</span></div>
+              <div class="aws-prog-bar"><div class="aws-prog-fill" data-width="70"></div></div>
+            </div>
+            <div class="aws-prog-item">
+              <div class="aws-prog-header"><span class="aws-prog-label">Overall Exam Readiness</span><span class="aws-prog-pct">78%</span></div>
+              <div class="aws-prog-bar"><div class="aws-prog-fill" data-width="78"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">06</span>
+        <h2>Certifications &amp; <em>Badges</em></h2>
+      </div>
+      <div class="badge-row reveal">
+        <img class="badge-img" src="certs/cert4.png" alt="AWS Cloud Quest Badge" onclick="openLightbox('certs/cert4.png','AWS Cloud Quest: Cloud Practitioner — Trained Badge')"/>
+        <div class="badge-label">
+          <h3>AWS Cloud Quest<br/>Cloud Practitioner</h3>
+          <p>Awarded for completing hands-on cloud scenario labs across core AWS services.</p>
+          <div class="badge-meta">Amazon Web Services · May 2026</div>
+        </div>
+      </div>
+
+      <div class="cert-category-label reveal">Amazon Web Services</div>
+      <div class="cert-grid">
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert8.jpg','AWS Cloud Quest: Cloud Practitioner — Completed May 1, 2026')">
+          <img class="cert-thumb" src="certs/cert8.jpg" alt="AWS Cloud Quest"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">AWS Cloud Quest: Cloud Practitioner</div><div class="cert-issuer-name">Amazon Web Services</div><div class="cert-date">✓ May 01, 2026</div></div>
+        </div>
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert2.jpg','AWS SimuLearn: File Systems in the Cloud — Completed May 18, 2026')">
+          <img class="cert-thumb" src="certs/cert2.jpg" alt="AWS SimuLearn"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">AWS SimuLearn: File Systems in the Cloud</div><div class="cert-issuer-name">Amazon Web Services</div><div class="cert-date">✓ May 18, 2026</div></div>
+        </div>
+      </div>
+
+      <div class="cert-category-label reveal">Artificial Intelligence</div>
+      <div class="cert-grid">
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert3.jpg','Generative AI for Decision Makers — Praesignis, April 2026')">
+          <img class="cert-thumb" src="certs/cert3.jpg" alt="Gen AI"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">Generative AI for Decision Makers</div><div class="cert-issuer-name">Praesignis</div><div class="cert-date">✓ April 15, 2026</div></div>
+        </div>
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert6.jpg','AI Practitioner Learning Plan — Praesignis, April 2026')">
+          <img class="cert-thumb" src="certs/cert6.jpg" alt="AI Practitioner"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">AI Practitioner Learning Plan</div><div class="cert-issuer-name">Praesignis</div><div class="cert-date">✓ April 14, 2026</div></div>
+        </div>
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert10.jpg','Introduction to Artificial Intelligence — NetCampus, March 2026')">
+          <img class="cert-thumb" src="certs/cert10.jpeg" alt="Intro AI"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">Introduction to Artificial Intelligence</div><div class="cert-issuer-name">NetCampus Group · Gauteng Province</div><div class="cert-date">✓ March 27, 2026</div></div>
+        </div>
+      </div>
+
+      <div class="cert-category-label reveal">Data &amp; Cybersecurity</div>
+      <div class="cert-grid">
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert11.jpg','Introduction to Data Analytics — NetCampus, April 2026')">
+          <img class="cert-thumb" src="certs/cert11.jpeg" alt="Data Analytics"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">Introduction to Data Analytics</div><div class="cert-issuer-name">NetCampus Group · Gauteng Province</div><div class="cert-date">✓ April 09, 2026</div></div>
+        </div>
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert7.jpg','SQL for Data Analysis — LinkedIn Learning, February 2026')">
+          <img class="cert-thumb" src="certs/cert7.jpg" alt="SQL"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">SQL for Data Analysis</div><div class="cert-issuer-name">LinkedIn Learning</div><div class="cert-date">✓ February 14, 2026</div></div>
+        </div>
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert5.jpg','Introduction to Cybersecurity — NetCampus, March 2026')">
+          <img class="cert-thumb" src="certs/cert5.jpg" alt="Cybersecurity"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">Introduction to Cybersecurity</div><div class="cert-issuer-name">NetCampus Group · Gauteng Province</div><div class="cert-date">✓ March 17, 2026</div></div>
+        </div>
+      </div>
+
+      <div class="cert-category-label reveal">Engineering Simulations</div>
+      <div class="cert-grid">
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert9.jpg','HPE Software Engineering Job Simulation — Forage, February 2026')">
+          <img class="cert-thumb" src="certs/cert9.jpg" alt="HPE"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">Software Engineering Job Simulation</div><div class="cert-issuer-name">Hewlett Packard Enterprise · Forage</div><div class="cert-date">✓ February 13, 2026</div></div>
+        </div>
+        <div class="cert-card reveal" onclick="openLightbox('certs/cert1.jpg','Wells Fargo Software Engineering Job Simulation — Forage, February 2026')">
+          <img class="cert-thumb" src="certs/cert1.jpg" alt="Wells Fargo"/><div class="cert-hover-hint">View Certificate</div>
+          <div class="cert-body"><div class="cert-name">Software Engineering Job Simulation</div><div class="cert-issuer-name">Wells Fargo · Forage</div><div class="cert-date">✓ February 18, 2026</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="contact-inner reveal">
+        <h2>Let's <em>Connect</em></h2>
+        <p>Open to internships, junior cloud roles, collaborations, or just a good conversation about tech.</p>
+        <span class="contact-avail">📍 Based in Johannesburg · Available Immediately</span>
+        <div class="contact-links">
+          <a href="mailto:neomasobela30@gmail.com" class="contact-link">✉ neomasobela30@gmail.com</a>
+          <a href="tel:0681350347" class="contact-link">📞 068 135 0347</a>
+          <a href="https://www.linkedin.com/in/neo-masobela-26678a258" target="_blank" class="contact-link">💼 LinkedIn</a>
+          <a href="https://github.com/Masobela" target="_blank" class="contact-link">🐙 GitHub</a>
+          <a href="cv.pdf" download class="contact-link" style="border-color:var(--blue);color:var(--blue);">↓ Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">© 2026 Neo Masobela · neomasobela30@gmail.com</div>
+    <div class="footer-right">Cloud Practitioner in Training · Johannesburg, ZA</div>
+  </footer>
+
+  <script>
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') }); });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal, .journey-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Animate progress bars when visible
+    const bars = document.querySelectorAll('.aws-prog-fill');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const w = entry.target.getAttribute('data-width');
+          entry.target.style.width = w + '%';
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    bars.forEach(b => barObserver.observe(b));
+
+    // Active nav
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (scrollY >= s.offsetTop - 80) current = s.id; });
+      navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+    });
+  </script>
+
+  <!-- MASCOT -->
+  <div id="mascot">
+    <div class="mascot-bubble" id="mascot-bubble">
+      <span class="mascot-bubble-close" onclick="dismissBubble()">✕</span>
+      <span id="mascot-msg">👋 Hi! I'm Neo's space guide. Click me for tips!</span>
+    </div>
+    <svg class="mascot-char" id="mascot-char" onclick="mascotClick()" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="60" cy="52" rx="36" ry="38" fill="#0d2d4a" stroke="#60b8f0" stroke-width="2"/>
+      <ellipse cx="60" cy="52" rx="24" ry="26" fill="#001428" stroke="#60b8f0" stroke-width="1.5" opacity="0.9"/>
+      <ellipse cx="50" cy="42" rx="8" ry="5" fill="rgba(96,184,240,0.2)" transform="rotate(-20 50 42)"/>
+      <circle cx="52" cy="50" r="4" fill="#60b8f0" opacity="0.9"/>
+      <circle cx="68" cy="50" r="4" fill="#60b8f0" opacity="0.9"/>
+      <circle cx="53" cy="51" r="1.5" fill="#ffffff"/>
+      <circle cx="69" cy="51" r="1.5" fill="#ffffff"/>
+      <path d="M51 60 Q60 67 69 60" stroke="#60b8f0" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="30" y="84" width="60" height="56" rx="8" fill="#051525" stroke="#0d2d4a" stroke-width="2"/>
+      <rect x="42" y="96" width="36" height="24" rx="3" fill="#071a2e" stroke="#1a3d5c" stroke-width="1"/>
+      <circle cx="52" cy="104" r="3" fill="#60b8f0" opacity="0.7"/>
+      <circle cx="60" cy="104" r="3" fill="#60b8f0" opacity="0.5"/>
+      <circle cx="68" cy="104" r="3" fill="#60b8f0" opacity="0.3"/>
+      <rect x="44" y="82" width="32" height="8" rx="4" fill="#0d2d4a" stroke="#60b8f0" stroke-width="1.5"/>
+      <rect x="12" y="88" width="20" height="40" rx="10" fill="#051525" stroke="#0d2d4a" stroke-width="1.5"/>
+      <rect x="88" y="80" width="20" height="40" rx="10" fill="#051525" stroke="#0d2d4a" stroke-width="1.5" transform="rotate(-20 98 90)"/>
+      <ellipse cx="22" cy="130" rx="10" ry="7" fill="#0d2d4a" stroke="#60b8f0" stroke-width="1"/>
+      <ellipse cx="104" cy="108" rx="10" ry="7" fill="#0d2d4a" stroke="#60b8f0" stroke-width="1" transform="rotate(-20 104 108)"/>
+      <line x1="60" y1="14" x2="60" y2="4" stroke="#60b8f0" stroke-width="2"/>
+      <circle cx="60" cy="4" r="3" fill="#60b8f0"><animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
+      <circle cx="14" cy="28" r="1.5" fill="#60b8f0" opacity="0.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="106" cy="20" r="1" fill="#a8d8f8" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="1.7s" repeatCount="indefinite"/></circle>
+      <circle cx="18" cy="70" r="1" fill="#60b8f0" opacity="0.4"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.3s" repeatCount="indefinite"/></circle>
+    </svg>
+  </div>
+
+  <!-- TOOL MODAL -->
+  <div class="tool-modal-overlay" id="tool-modal" onclick="closeToolModal(event)">
+    <div class="tool-modal">
+      <span class="tool-modal-close" onclick="closeToolModal()">✕</span>
+      <div class="tool-modal-header">
+        <span class="tool-modal-icon" id="tm-icon"></span>
+        <div><div class="tool-modal-title" id="tm-title"></div><div class="tool-modal-sub" id="tm-sub"></div></div>
+      </div>
+      <div class="tool-modal-body">
+        <div class="tool-modal-desc" id="tm-desc"></div>
+        <div class="tool-modal-uses"><div class="tool-modal-uses-title">What I used it for</div><ul id="tm-uses"></ul></div>
+      </div>
+      <div class="tool-modal-footer">
+        <span class="tool-modal-tag" id="tm-tag"></span>
+        <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text3);">AWS Service</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
