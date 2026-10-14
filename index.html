@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neo Masobela | AWS Certified Cloud Practitioner &amp; Aspiring SOC Analyst</title>
+<meta name="description" content="Neo Masobela is an AWS Certified Cloud Practitioner and aspiring Junior Cybersecurity / SOC Analyst based in Vanderbijlpark, South Africa.">
+<meta name="theme-color" content="#101C2E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23101C2E'/%3E%3Cpath d='M9 23V9h3l8 10V9h3v14h-3L12 13v10z' fill='%237FE0A8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F6F8;
+    --surface: #FFFFFF;
+    --ink: #101C2E;
+    --steel: #4F5F73;
+    --line: #D5DCE4;
+    --signal: #0B6E99;
+    --signal-dark: #08577A;
+    --open: #7FE0A8;
+    --term: #0E1A2B;
+    --term-text: #D6E2F0;
+    --term-dim: #8DA2BA;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--signal); text-underline-offset: 3px; }
+  a:hover { color: var(--signal-dark); }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Top bar */
+  .topbar { border-bottom: 1px solid var(--line); background: var(--surface); }
+  .topbar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-top: .9rem; padding-bottom: .9rem; }
+  .brand { font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: .01em; }
+  .topbar nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+  .topbar nav a { color: var(--steel); text-decoration: none; font-size: .95rem; padding: .25rem 0; }
+  .topbar nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  /* Hero */
+  .hero { padding: 4rem 0 3.5rem; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; }
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    line-height: 1.02;
+    letter-spacing: -.03em;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .role { font-size: 1.2rem; font-weight: 600; color: var(--signal-dark); margin: 0 0 1.25rem; }
+  .intro { max-width: 36rem; color: var(--steel); margin: 0 0 1.75rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn {
+    display: inline-block;
+    padding: .7rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: .98rem;
+    text-decoration: none;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn:hover { background: var(--ink); color: #fff; }
+  .btn.primary { background: var(--ink); color: #fff; }
+  .btn.primary:hover { background: var(--signal-dark); border-color: var(--signal-dark); }
+
+  /* Terminal: the one memorable thing */
+  .term {
+    background: var(--term);
+    color: var(--term-text);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem 1.3rem;
+    font-family: var(--mono);
+    font-size: .8rem;
+    line-height: 1.75;
+    overflow-x: auto;
+    box-shadow: 0 1px 0 rgba(16,28,46,.06), 0 18px 40px -22px rgba(16,28,46,.55);
+  }
+  .term .bar { display: flex; gap: .4rem; margin-bottom: .8rem; }
+  .term .bar i { width: 10px; height: 10px; border-radius: 50%; background: #2A3B54; display: block; }
+  .term .ln { white-space: pre; opacity: 0; animation: reveal .01s forwards; animation-delay: calc(var(--i) * .32s + .3s); }
+  .term .dim { color: var(--term-dim); }
+  .term .ok { color: var(--open); }
+  .term .cmd b { color: #fff; font-weight: 500; }
+  @keyframes reveal { to { opacity: 1; } }
+
+  /* Sections */
+  main section { border-top: 1px solid var(--line); padding: 3rem 0; }
+  .row { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem 3rem; }
+  h2 { font-size: 1.15rem; margin: 0; line-height: 1.3; font-weight: 700; }
+  h3 { font-size: 1.1rem; margin: 0 0 .15rem; line-height: 1.35; }
+  .when { color: var(--steel); font-size: .92rem; margin: 0 0 .6rem; }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0; padding-left: 1.2rem; }
+  li { margin-bottom: .4rem; }
+  .item { margin-bottom: 2.25rem; }
+  .item:last-child { margin-bottom: 0; }
+
+  .skills { margin: 0; }
+  .skills dt { font-weight: 600; margin-top: 1.1rem; }
+  .skills dt:first-child { margin-top: 0; }
+  .skills dd { margin: .15rem 0 0; color: var(--steel); }
+
+  .plain { list-style: none; padding: 0; }
+  .plain li { padding: .55rem 0; border-bottom: 1px solid var(--line); margin: 0; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .plain li:first-child { padding-top: 0; }
+  .plain li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .plain .date { color: var(--steel); font-size: .92rem; }
+
+  .contact-list { list-style: none; padding: 0; }
+  .contact-list li { margin-bottom: .5rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 1.75rem 0 2.5rem; color: var(--steel); font-size: .92rem; }
+
+  /* Small screens */
+  @media (max-width: 860px) {
+    .hero { padding: 2.5rem 0 2.5rem; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .row { grid-template-columns: 1fr; gap: 1rem; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 1rem; }
+    .term { font-size: .72rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .term .ln { animation: none; opacity: 1; }
+  }
+  @media print {
+    .term, .topbar { display: none; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Neo Masobela</a>
+    <nav aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Neo Masobela</h1>
+        <p class="role">AWS Certified Cloud Practitioner. Aspiring Junior Cybersecurity / SOC Analyst.</p>
+        <p class="intro">I combine AWS cloud training with hands-on cybersecurity lab work: scanning networks, setting up firewalls, and testing web apps for weak spots in safe practice labs. I'm looking for a Junior Security Analyst, SOC Analyst Trainee, IT Support, or Cloud Support role.</p>
+        <div class="actions">
+          <a class="btn primary" href="Neo_Masobelas_Resume.pdf" download>Download my CV</a>
+          <a class="btn" href="mailto:neomasobela30@gmail.com">Email me</a>
+          <a class="btn" href="https://linkedin.com/in/neo-masobela-26678a258">LinkedIn</a>
+          <a class="btn" href="https://github.com/Masobela">GitHub</a>
+        </div>
+      </div>
+
+      <div class="term" aria-hidden="true">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="ln cmd" style="--i:0"><span class="dim">$</span> <b>nmap -sV neo-masobela</b></div>
+        <div class="ln dim" style="--i:1">Scanning profile...</div>
+        <div class="ln dim" style="--i:2">PORT      STATE  SERVICE</div>
+        <div class="ln" style="--i:3">22/tcp    <span class="ok">open</span>   linux &amp; kali</div>
+        <div class="ln" style="--i:4">53/tcp    <span class="ok">open</span>   networking</div>
+        <div class="ln" style="--i:5">443/tcp   <span class="ok">open</span>   aws-cloud</div>
+        <div class="ln" style="--i:6">3306/tcp  <span class="ok">open</span>   sql &amp; rds</div>
+        <div class="ln" style="--i:7">8080/tcp  <span class="ok">open</span>   python</div>
+        <div class="ln dim" style="--i:8">Scan done: open to work</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap row">
+      <h2>About</h2>
+      <div>
+        <p>I completed the AWS re/Start cloud computing programme through Praesignis, an AWS Authorised Training Partner. It gave me practical experience with core AWS services, identity and access management, and cloud security.</p>
+        <p>I'm also in the Oasis Infobyte Cyber Security Internship (OIBSIP), where I practise network reconnaissance, firewall configuration, and web application vulnerability testing inside controlled virtual labs. I like to write down what I find and work through problems step by step.</p>
+        <p>I'm studying cybersecurity fundamentals through Cisco Networking Academy and Hack The Box Academy. My main interests are network security, vulnerability assessment, and cloud security.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap row">
+      <h2>Projects and lab work</h2>
+      <div>
+        <article class="item">
+          <h3>Oasis Infobyte Cyber Security Internship (OIBSIP)</h3>
+          <p class="when">In progress. Started October 2026. <a href="https://github.com/Masobela/OIBSIP">Code and reports on GitHub</a></p>
+
+          <p><strong>Task 1: Network scanning with Nmap</strong></p>
+          <ul>
+            <li>Ran network reconnaissance in a controlled virtual lab using Kali Linux and Metasploitable 2.</li>
+            <li>Used Nmap for port scanning, service and version detection, and operating system detection.</li>
+            <li>Found open ports and services, wrote up the results in a scan report, and explained what they mean for possible attack surfaces.</li>
+          </ul>
+
+          <p style="margin-top:1.25rem"><strong>Task 2: Firewall setup with UFW</strong></p>
+          <ul>
+            <li>Turned on the Uncomplicated Firewall (UFW) on Kali Linux with default deny-incoming and allow-outgoing rules.</li>
+            <li>Allowed SSH (TCP 22) and HTTPS (TCP 443), and blocked HTTP (TCP 80) and FTP (TCP 21).</li>
+            <li>Checked the firewall status and rules, tested the connection from a second virtual machine, and documented every step.</li>
+          </ul>
+
+          <p style="margin-top:1.25rem"><strong>Task 3: SQL injection testing with DVWA</strong></p>
+          <ul>
+            <li>Installed Damn Vulnerable Web Application (DVWA) in a local lab at Low security for safe testing.</li>
+            <li>Showed a SQL injection weakness with crafted input and documented how normal input and injected input behave differently.</li>
+            <li>Studied secure coding fixes, including prepared statements and parameterized queries.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>AWS re/Start: cloud, networking and security labs</h3>
+          <p class="when">April to August 2026</p>
+          <ul>
+            <li>Built a serverless word-count pipeline (Amazon S3 to AWS Lambda to Amazon SNS) using Python.</li>
+            <li>Set up IAM group-based access policies, designed VPC and subnet layouts, and fixed Security Group problems.</li>
+            <li>Used AWS KMS encryption and moved a MySQL database to Amazon RDS, checking that the data stayed correct.</li>
+            <li>Used AWS Inspector for vulnerability scanning and Systems Manager Patch Manager to keep patches up to date.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap row">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Cybersecurity</dt>
+        <dd>Nmap network scanning and reconnaissance, port, service and OS detection, firewall configuration (UFW), SQL injection basics (DVWA), vulnerability assessment basics, security incident documentation</dd>
+        <dt>Operating systems and networking</dt>
+        <dd>Kali Linux, Linux command line, TCP/IP, ports and protocols, virtual lab networking (VirtualBox), DNS, SSH, RDP, VPN and NAT basics</dd>
+        <dt>Cloud (AWS)</dt>
+        <dd>IAM, S3, Lambda, SNS, VPC and Security Groups, KMS, RDS, Inspector, Systems Manager (Patch Manager)</dd>
+        <dt>Tools and programming</dt>
+        <dd>UFW, DVWA, Metasploitable 2, Git and GitHub, Splunk basics, Python (Pandas, scikit-learn), SQL, Microsoft Office (Word, Excel, PowerPoint, Access)</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap row">
+      <h2>Experience</h2>
+      <div>
+        <article class="item">
+          <h3>Control Room Operator, Manufacturing Learnership</h3>
+          <p class="when">ArcelorMittal. About 1 year</p>
+          <ul>
+            <li>Watched operational systems and screens all shift to spot problems, stoppages, and unusual activity as it happened.</li>
+            <li>Recorded incidents with the cause, location, and time, and kept clear, accurate records.</li>
+            <li>Escalated issues by how serious they were, ran shift handovers, and kept KPI boards up to date on 12-hour rotating shifts.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap row">
+      <h2>Education and certifications</h2>
+      <div>
+        <div class="item">
+          <h3>Training</h3>
+          <ul class="plain">
+            <li><span>AWS re/Start Cloud Computing Programme, Praesignis</span><span class="date">Apr to Aug 2026</span></li>
+            <li><span>Cisco Networking Academy: Cybersecurity and Networking</span><span class="date">In progress</span></li>
+            <li><span>Hack The Box Academy: Networking Fundamentals</span><span class="date">In progress</span></li>
+            <li><span>Introduction to Cybersecurity, Netcampus</span><span class="date">16 to 20 Mar 2026</span></li>
+            <li><span>Introduction to Splunk</span><span class="date">2026</span></li>
+            <li><span>National Senior Certificate (Matric), Hoerskool Suiderlig, Vanderbijlpark</span><span class="date">2023</span></li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>Certifications</h3>
+          <ul class="plain">
+            <li><span>AWS Certified Cloud Practitioner (CLF-C02)</span><span class="date">Sept 2026</span></li>
+            <li><span>AWS Cloud Quest: Cloud Practitioner badge</span></li>
+            <li><span>Cisco Networking Academy: Introduction to Cybersecurity badge</span></li>
+            <li><span>Microsoft Intermediate Certificate (Word, PowerPoint, Excel, Access)</span></li>
+            <li><span>Google Workspace / Gmail Certificate</span></li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>Languages</h3>
+          <p>English (fluent), Afrikaans (proficient)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap row">
+      <h2>Contact</h2>
+      <div>
+        <p>I'm open to Junior Security Analyst, SOC Analyst Trainee, IT Support, and Cloud Support roles.</p>
+        <ul class="contact-list">
+          <li>Email: <a href="mailto:neomasobela30@gmail.com">neomasobela30@gmail.com</a></li>
+          <li>Phone: <a href="tel:+27681350347">068 135 0347</a></li>
+          <li>Location: Vanderbijlpark, Gauteng, South Africa</li>
+          <li>LinkedIn: <a href="https://linkedin.com/in/neo-masobela-26678a258">linkedin.com/in/neo-masobela-26678a258</a></li>
+          <li>GitHub: <a href="https://github.com/Masobela">github.com/Masobela</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Neo Masobela. Vanderbijlpark, South Africa.</div>
+</footer>
+
+</body>
+</html>
